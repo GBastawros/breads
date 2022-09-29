@@ -1,7 +1,7 @@
 const React = require('react')
 const Default = require('./layouts/Default')
 
-function Index({breads, title}) {
+function index({breads, title}) {
     return (
         <Default title={title}>
             <h2>Index Page</h2>
@@ -23,4 +23,4 @@ function Index({breads, title}) {
     )
 }
 
-module.exports = Index
+module.exports = index
