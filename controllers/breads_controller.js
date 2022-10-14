@@ -1,5 +1,4 @@
 const express = require('express')
-const { findByIdAndUpdate } = require('../models/bread.js')
 const breads = express.Router()
 const Bread = require('../models/bread.js')
 const Baker = require('../models/baker.js')
@@ -16,19 +15,15 @@ breads.get('/new', (req, res) => {
 })
 
 // INDEX
-breads.get('/', (req, res) => {
-  Baker.find()
-    .then(foundBakers => {
-      Bread.find()
-        .populate('baker')
-        .then(foundBreads => {
-          res.render('index', {
-            breads: foundBreads,
-            title: 'Index Page'
-          })
+breads.get('/', async (req, res) => {
+  const foundBakers = await Baker.find().lean()
+  const foundBreads = await Bread.find().populate('baker').limit(2).lean()
+  res.render('index', {
+    breads: foundBreads,
+    bakers: foundBakers,
+    title: 'Index Page'
+  })
 
-        })
-    })
 })
 
 breads.get('/data/seed', (req, res) => {

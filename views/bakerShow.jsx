@@ -9,6 +9,10 @@ function Show({ baker }) {
       <p>About {baker.name}: {baker.bio}</p>
       <h3>Breads {baker.name} has baked</h3>
       <ul>
+        <form action={`/bakers/${baker.id}?_method=DELETE`} method="POST">
+          <input type="submit" value="DELETE" />
+        </form>
+
         {
           baker.breads.map((bread) => {
             return (
