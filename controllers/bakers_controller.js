@@ -22,8 +22,8 @@ baker.get('/data/seed', (req, res) => {
 baker.get('/:id', (req, res) => {
     Baker.findById(req.params.id)
         .populate({
-            path: 'breads'
-    option: { linit: 2 }
+            path: 'breads',
+            option: { limit: 2 }
         })
         .then(foundBaker => {
             res.render('bakerShow', {
